@@ -7,11 +7,7 @@ const next = require('next')
 const isDev = require('electron-is-dev')
 
 const devServer = async (app, dir, port) => {
-  const nextApp = next({
-    dev: true,
-    dir: dir || path.join(process.cwd(), 'renderer')
-  })
-
+  const nextApp = next({ dev: true, dir })
   const nextHandler = nextApp.getRequestHandler()
 
   // Build the renderer code and watch the files
@@ -28,7 +24,7 @@ const devServer = async (app, dir, port) => {
   })
 }
 
-const adjustRenderer = protocol => {
+const adjustRenderer = (protocol, dir) => {
   const paths = ['_next', 'static']
 
   protocol.interceptFileProtocol('file', (request, callback) => {
@@ -36,7 +32,7 @@ const adjustRenderer = protocol => {
 
     for (const replacement of paths) {
       const wrongPath = '///' + replacement
-      const rightPath = '//' + resolvePath('./renderer') + '/' + replacement
+      const rightPath = '//' + dir + '/' + replacement
 
       filePath = filePath.replace(wrongPath, rightPath)
     }
@@ -46,10 +42,12 @@ const adjustRenderer = protocol => {
 }
 
 module.exports = async (electron, dir, port) => {
+  const directory = dir || path.join(process.cwd(), 'renderer')
+
   if (!isDev) {
-    adjustRenderer(electron.protocol)
+    adjustRenderer(electron.protocol, directory)
     return
   }
 
-  await devServer(electron.app, dir, port)
+  await devServer(electron.app, directory, port)
 }
