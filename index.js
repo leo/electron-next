@@ -42,12 +42,10 @@ const adjustRenderer = (protocol, dir) => {
 }
 
 module.exports = async (electron, dir, port) => {
-  const directory = dir || path.join(process.cwd(), 'renderer')
-
   if (!isDev) {
-    adjustRenderer(electron.protocol, directory)
+    adjustRenderer(electron.protocol, dir)
     return
   }
 
-  await devServer(electron.app, directory, port)
+  await devServer(electron.app, dir, port)
 }
