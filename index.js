@@ -42,7 +42,7 @@ const adjustRenderer = (protocol, dir) => {
 }
 
 module.exports = async (electron, dirs, port) => {
-  const directories = {}
+  let directories = {}
 
   if (typeof dirs === 'string') {
     directories.prod = dirs
