@@ -13,18 +13,13 @@ npm install --save electron-next
 Then load it:
 
 ```js
-const isDev = require('electron-is-dev')
-const { devServer, adjustRenderer } = require('electron-next')
+const prepareNext = require('electron-next')
 ```
 
 And finally use it to prepare your application before you create and `BrowserWindow`s:
 
 ```js
-if (isDev) {
-  await devServer(app)
-} else {
-  adjustRenderer(protocol)
-}
+await prepareNext(electron)
 ```
 
 ## Caught a Bug?
