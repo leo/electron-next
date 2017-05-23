@@ -13,6 +13,7 @@
   "author": "leo",
   "license": "MIT",
   "dependencies": {
+    "electron-is-dev": "^0.1.2",
     "next": "3.0.0-beta6",
     "react": "15.5.4",
     "react-dom": "15.5.4"

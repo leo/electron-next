@@ -4,8 +4,9 @@ const path = require('path')
 
 // Packages
 const next = require('next')
+const isDev = require('electron-is-dev')
 
-exports.devServer = async (app, dir, port) => {
+const devServer = async (app, dir, port) => {
   const nextApp = next({
     dev: true,
     dir: dir || path.join(process.cwd(), 'renderer')
@@ -27,7 +28,7 @@ exports.devServer = async (app, dir, port) => {
   })
 }
 
-exports.adjustRenderer = protocol => {
+const adjustRenderer = protocol => {
   const paths = ['_next', 'static']
 
   protocol.interceptFileProtocol('file', (request, callback) => {
@@ -42,4 +43,13 @@ exports.adjustRenderer = protocol => {
 
     callback({ path: filePath })
   })
+}
+
+module.exports = async (electron, dir, port) => {
+  if (!isDev) {
+    adjustRenderer(electron.protocol)
+    return
+  }
+
+  await devServer(electron.app, dir, port)
 }
