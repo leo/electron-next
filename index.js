@@ -27,7 +27,7 @@ exports.devServer = async (app, dir, port) => {
   })
 }
 
-exports.adjustProtocol = protocol => {
+exports.adjustRenderer = protocol => {
   const paths = ['_next', 'static']
 
   protocol.interceptFileProtocol('file', (request, callback) => {
