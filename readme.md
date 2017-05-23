@@ -13,13 +13,18 @@ npm install --save electron-next
 Then load it:
 
 ```js
+const electron = require('electron')
 const prepareNext = require('electron-next')
+const { resolve } = require('app-root-path')
 ```
 
 And finally use it to prepare your application before you create and `BrowserWindow`s:
 
 ```js
-await prepareNext(electron)
+await prepareNext(electron, {
+  dev: resolve('./renderer/out'),
+  prod: resolve('./renderer')
+})
 ```
 
 ## Caught a Bug?

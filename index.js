@@ -41,11 +41,20 @@ const adjustRenderer = (protocol, dir) => {
   })
 }
 
-module.exports = async (electron, dir, port) => {
+module.exports = async (electron, dirs, port) => {
+  const directories = {}
+
+  if (typeof dirs === 'string') {
+    directories.prod = dirs
+    directories.dev = dirs
+  } else {
+    directories = dirs
+  }
+
   if (!isDev) {
-    adjustRenderer(electron.protocol, dir)
+    adjustRenderer(electron.protocol, dirs.prod)
     return
   }
 
-  await devServer(electron.app, dir, port)
+  await devServer(electron.app, dirs.dev, port)
 }
