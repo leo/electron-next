@@ -52,9 +52,9 @@ module.exports = async (electron, dirs, port) => {
   }
 
   if (!isDev) {
-    adjustRenderer(electron.protocol, dirs.prod)
+    adjustRenderer(electron.protocol, directories.prod)
     return
   }
 
-  await devServer(electron.app, dirs.dev, port)
+  await devServer(electron.app, directories.dev, port)
 }
