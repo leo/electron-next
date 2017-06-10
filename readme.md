@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/leo/electron-next.svg?branch=master)](https://travis-ci.org/leo/electron-next)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
-This package let's you use [Next.js](https://github.com/zeit/next.js) for building the renderer of your [Electron](https://electron.atom.io) apps! 🤠
+This package let's you use [Next.js](https://github.com/zeit/next.js) for building the renderer of your [Electron](https://electron.atom.io) apps!
 
 ## Usage
 
@@ -32,7 +32,7 @@ await prepareRenderer(<path>, <port>)
 
 1. [Fork](https://help.github.com/articles/fork-a-repo/) this repository to your own GitHub account and then [clone](https://help.github.com/articles/cloning-a-repository/) it to your local device
 2. Link the package to the global module directory: `npm link`
-3. Within the module you want to test your local development instance of the package, just link it to the dependencies: `npm link electron-next`. Instead of the default one from npm, node will now use your clone of the package!
+3. Within the electron app of your choice, link it to the dependencies: `npm link electron-next`. Instead of the default one from npm, it will now use your local clone of the package!
 
 ## Author
 
