@@ -3,8 +3,10 @@ const { createServer } = require('http')
 const path = require('path')
 
 // Packages
+const electron = require('electron')
 const next = require('next')
 const isDev = require('electron-is-dev')
+const { resolve } = require('app-root-path')
 
 const devServer = async (app, dir, port) => {
   const nextApp = next({ dev: true, dir })
@@ -43,18 +45,23 @@ const adjustRenderer = (protocol, dir) => {
       filePath = path.normalize(filePath.replace(replacement, newPath))
     }
 
-    callback({path: filePath})
+    callback({ path: filePath })
   })
 }
 
-module.exports = async (electron, dirs, port) => {
+module.exports = async dirs => {
   let directories = {}
 
   if (typeof dirs === 'string') {
+    dirs = resolve(dirs)
+
     directories.prod = dirs
     directories.dev = dirs
   } else {
-    directories = dirs
+    directories = {
+      prod: resolve(dirs.production),
+      dev: resolve(dirs.development)
+    }
   }
 
   if (!isDev) {
@@ -62,5 +69,5 @@ module.exports = async (electron, dirs, port) => {
     return
   }
 
-  await devServer(electron.app, directories.dev, port)
+  await devServer(electron.app, directories.dev)
 }

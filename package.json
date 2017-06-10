@@ -27,6 +27,8 @@
   "author": "leo",
   "license": "MIT",
   "dependencies": {
+    "app-root-path": "2.0.1",
+    "electron": "1.6.10",
     "electron-is-dev": "0.1.2",
     "next": "3.0.0-beta6",
     "react": "15.5.4",
