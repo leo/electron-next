@@ -7,24 +7,23 @@ This package allows you to use [Next.js](https://github.com/zeit/next.js) easily
 
 ### Usage
 
-Simply install the package:
+Firstly, install the package using [npm](https://www.npmjs.com):
 
 ```bash
 npm install --save electron-next
 ```
 
-Then load it:
+Then load it (and ensure that [electron](https://electron.atom.io) is accessible as well):
 
 ```js
+const prepareRenderer = require('electron-next')
 const electron = require('electron')
-const prepareNext = require('electron-next')
-const { resolve } = require('app-root-path')
 ```
 
 And finally use it to prepare your application before you create and `BrowserWindow`s:
 
 ```js
-await prepareNext(electron, {
+await prepareRenderer(electron, {
   dev: resolve('./renderer/out'),
   prod: resolve('./renderer')
 })
