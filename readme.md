@@ -22,10 +22,10 @@ const prepareRenderer = require('electron-next')
 As the final step, call the package:
 
 - `<path>`: The path to the directory containing the renderer (relative to the app's root directory). If the paths for development and production aren't the same, this can be an object holding a `development` and a `production` key with their respective paths.
-- `<windows>`: An instance of [BrowserWindow](https://github.com/electron/electron/blob/master/docs/api/browser-window.md) or an array containing a list of such instances **(optional)**.
+- `<port>`: In development mode, this port will be used for running [Next](https://github.com/zeit/next.js).
 
 ```js
-await prepareRenderer(<path>, <windows>)
+await prepareRenderer(<path>, <port>)
 ```
 
 ## Caught a Bug?
