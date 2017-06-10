@@ -5,7 +5,7 @@
 
 This package allows you to use [Next.js](https://github.com/zeit/next.js) easily for building the renderer process inside [Electron](https://electron.atom.io) apps.
 
-### Usage
+## Usage
 
 Firstly, install the package using [npm](https://www.npmjs.com):
 
