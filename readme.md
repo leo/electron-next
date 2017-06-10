@@ -13,20 +13,16 @@ Firstly, install the package using [npm](https://www.npmjs.com):
 npm install --save electron-next
 ```
 
-Then load it (and ensure that [electron](https://electron.atom.io) is accessible as well):
+Then load it:
 
 ```js
 const prepareRenderer = require('electron-next')
-const electron = require('electron')
 ```
 
-And finally use it to prepare your application before you create and `BrowserWindow`s:
+As the final step, call the package. In the example shown below, `<windows>` needs to be either an instance of [electron](https://electron.atom.io)'s `BrowserWindow` or an array containing a list of such instances.
 
 ```js
-await prepareRenderer(electron, {
-  dev: resolve('./renderer/out'),
-  prod: resolve('./renderer')
-})
+await prepareRenderer(<windows>, <path>)
 ```
 
 ## Caught a Bug?
