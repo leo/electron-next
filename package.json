@@ -4,12 +4,26 @@
   "description": "Build Electron apps using Next.js",
   "main": "index.js",
   "repository": "leo/electron-next",
+  "scripts": {
+    "precommit": "lint-staged",
+    "test": "xo"
+  },
   "keywords": [
     "electron",
     "next",
     "electron.js",
     "next.js"
   ],
+  "xo": {
+    "extends": "prettier"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run test",
+      "prettier --single-quote --no-semi --write",
+      "git add"
+    ]
+  },
   "author": "leo",
   "license": "MIT",
   "dependencies": {
@@ -17,5 +31,12 @@
     "next": "3.0.0-beta6",
     "react": "15.5.4",
     "react-dom": "15.5.4"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^2.1.1",
+    "husky": "^0.13.4",
+    "lint-staged": "^3.6.1",
+    "prettier": "^1.4.4",
+    "xo": "^0.18.2"
   }
 }
