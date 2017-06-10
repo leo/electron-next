@@ -1,15 +1,14 @@
 // Native
 const { createServer } = require('http')
-const path = require('path')
+const { parse, normalize, join } = require('path')
 
 // Packages
 const electron = require('electron')
 const next = require('next')
 const isDev = require('electron-is-dev')
 const { resolve } = require('app-root-path')
-const detectPort = require('detect-port')
 
-const devServer = async (app, dir) => {
+const devServer = async (dir, port) => {
   const nextApp = next({ dev: true, dir })
   const nextHandler = nextApp.getRequestHandler()
 
@@ -20,12 +19,6 @@ const devServer = async (app, dir) => {
   // new native HTTP server (which supports hot code reloading)
   const server = createServer(nextHandler)
 
-  let port
-
-  try {
-    port = await detectPort()
-  } catch (err) {}
-
   server.listen(port || 8000, () => {
     // Make sure to stop the server when the app closes
     // Otherwise it keeps running on its own
@@ -33,48 +26,53 @@ const devServer = async (app, dir) => {
   })
 }
 
-const adjustRenderer = (protocol, dir) => {
+const adjustRenderer = directory => {
   const paths = ['_next', 'static']
   const isWindows = process.platform === 'win32'
 
   electron.protocol.interceptFileProtocol('file', (request, callback) => {
-    let filePath = request.url.substr(isWindows ? 8 : 7)
+    let path = request.url.substr(isWindows ? 8 : 7)
 
     for (const replacement of paths) {
-      if (!filePath.includes(replacement)) {
+      if (!path.includes(replacement)) {
         continue
       }
 
-      const parsed = path.parse(filePath)
-      const newPrefix = dir.replace(path.normalize(parsed.root), '')
-      const newPath = path.join(newPrefix, replacement)
+      const parsed = parse(path)
+      const newPrefix = directory.replace(normalize(parsed.root), '')
+      const newPath = join(newPrefix, replacement)
 
-      filePath = path.normalize(filePath.replace(replacement, newPath))
+      path = normalize(path.replace(replacement, newPath))
     }
 
-    callback({ path: filePath })
+    callback({ path })
   })
 }
 
-module.exports = async dirs => {
-  let directories = {}
+module.exports = async (directories, port) => {
+  if (!directories) {
+    throw new Error('Renderer location not defined')
+  }
 
-  if (typeof dirs === 'string') {
-    dirs = resolve(dirs)
-
-    directories.prod = dirs
-    directories.dev = dirs
-  } else {
+  if (typeof directories === 'string') {
     directories = {
-      prod: resolve(dirs.production),
-      dev: resolve(dirs.development)
+      production: directories,
+      development: directories
     }
   }
 
+  for (const directory in directories) {
+    if (!{}.hasOwnProperty.call(directories, directory)) {
+      continue
+    }
+
+    directories[directory] = resolve(directories[directory])
+  }
+
   if (!isDev) {
-    adjustRenderer(directories.prod)
+    adjustRenderer(directories.production)
     return
   }
 
-  await devServer(directories.dev)
+  await devServer(directories.development, port)
 }
