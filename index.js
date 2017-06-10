@@ -26,18 +26,24 @@ const devServer = async (app, dir, port) => {
 
 const adjustRenderer = (protocol, dir) => {
   const paths = ['_next', 'static']
+  const isWindows = process.platform === 'win32'
 
   protocol.interceptFileProtocol('file', (request, callback) => {
-    let filePath = request.url.substr('file'.length + 1)
+    let filePath = request.url.substr(isWindows ? 8 : 7)
 
     for (const replacement of paths) {
-      const wrongPath = '///' + replacement
-      const rightPath = '//' + dir + '/' + replacement
+      if (!filePath.includes(replacement)) {
+        continue
+      }
 
-      filePath = filePath.replace(wrongPath, rightPath)
+      const parsed = path.parse(filePath)
+      const newPrefix = dir.replace(path.normalize(parsed.root), '')
+      const newPath = path.join(newPrefix, replacement)
+
+      filePath = path.normalize(filePath.replace(replacement, newPath))
     }
 
-    callback({ path: filePath })
+    callback({path: filePath})
   })
 }
 
