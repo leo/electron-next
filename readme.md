@@ -22,7 +22,7 @@ const prepareRenderer = require('electron-next')
 As the final step, call the package:
 
 - `<windows>`: An instance of [BrowserWindow](https://github.com/electron/electron/blob/master/docs/api/browser-window.md) or an array containing a list of such instances.
-- `<path>`: The full path to the directory containing the exported renderer.
+- `<path>`: The path to the directory containing the renderer (relative to the app's root directory). If the paths for development and production aren't the same, this can be an object holding a `development` and a `production` key with their respective paths.
 
 ```js
 await prepareRenderer(<windows>, <path>)
