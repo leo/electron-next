@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/leo/electron-next.svg?branch=master)](https://travis-ci.org/leo/electron-next)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
-This package let's you use [Next.js](https://github.com/zeit/next.js) for building the renderer of your [Electron](https://electron.atom.io) app.
+This package let's you use [Next.js](https://github.com/zeit/next.js) for building the renderer of your [Electron](https://electron.atom.io) apps! 🤠
 
 ## Usage
 
