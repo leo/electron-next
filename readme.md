@@ -19,7 +19,7 @@ Then load it:
 const prepareRenderer = require('electron-next')
 ```
 
-As the final step, call the package. In the example shown below, `<windows>` needs to be either an instance of [electron](https://electron.atom.io)'s `BrowserWindow` or an array containing a list of such instances.
+As the final step, call the package. In the example shown below, `<windows>` needs to be either an instance of [BrowserWindow](https://github.com/electron/electron/blob/master/docs/api/browser-window.md) or an array containing a list of such instances.
 
 ```js
 await prepareRenderer(<windows>, <path>)
