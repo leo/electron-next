@@ -27,12 +27,12 @@
   "author": "leo",
   "license": "MIT",
   "dependencies": {
-    "app-root-path": "2.0.1",
-    "electron": "1.6.11",
-    "electron-is-dev": "0.1.2",
-    "next": "3.0.0-beta14",
-    "react": "15.5.4",
-    "react-dom": "15.5.4"
+    "app-root-path": ">=2.0.1",
+    "electron": ">=1.6.11",
+    "electron-is-dev": ">=0.1.2",
+    "next": ">=3.0.0-beta14",
+    "react": ">=15.5.4",
+    "react-dom": ">=15.5.4"
   },
   "devDependencies": {
     "eslint-config-prettier": "2.1.1",
