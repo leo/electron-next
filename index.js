@@ -4,11 +4,15 @@ const { parse, normalize, join } = require('path')
 
 // Packages
 const electron = require('electron')
-const next = require('next')
 const isDev = require('electron-is-dev')
 const { resolve } = require('app-root-path')
 
 const devServer = async (dir, port) => {
+  // We need to load it here because the app's production
+  // bundle shouldn't include it, which would result
+  // in an error
+  const next = require('next')
+
   const nextApp = next({ dev: true, dir })
   const nextHandler = nextApp.getRequestHandler()
 

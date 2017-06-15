@@ -15,7 +15,11 @@
     "next.js"
   ],
   "xo": {
-    "extends": "prettier"
+    "extends": "prettier",
+    "rules": {
+      "import/no-unresolved": 0,
+      "import/no-extraneous-dependencies": 0
+    }
   },
   "lint-staged": {
     "*.js": [
