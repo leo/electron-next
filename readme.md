@@ -24,7 +24,7 @@ const prepareRenderer = require('electron-next')
 
 As the final step, call the package:
 
-- `<path>`: The path to the directory containing the renderer (relative to the app's root directory). If the paths for development and production aren't the same, this can be an object holding a `development` and a `production` key with their respective paths (string|array).
+- `<path>`: The path to the directory containing the renderer (relative to the app's root directory). If the paths for development and production aren't the same, this can be an object holding a `development` and a `production` key with their respective paths (string|object).
 - `<port>`: Used for running [Next.js](https://github.com/zeit/next.js) in development (number, **optional**, defaults to `8000`).
 
 ```js
