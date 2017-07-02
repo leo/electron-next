@@ -5,6 +5,9 @@
 
 This package let's you use [Next.js](https://github.com/zeit/next.js) for building the renderer of your [Electron](https://electron.atom.io) apps!
 
+- In production, it ensures that the `file://` protocol (which Electron uses to load your static assets in the renderer process) works properly with your Next.js bundle
+- While developing, it takes care of the whole development flow required for building the renderer code
+
 ## Usage
 
 Firstly, install the package using [npm](https://www.npmjs.com):
