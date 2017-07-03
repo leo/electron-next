@@ -3,7 +3,7 @@ const { createServer } = require('http')
 const { parse, normalize, join } = require('path')
 
 // Packages
-const electron = require('electron')
+const { app, protocol } = require('electron')
 const isDev = require('electron-is-dev')
 const { resolve } = require('app-root-path')
 
@@ -26,7 +26,7 @@ const devServer = async (dir, port) => {
   server.listen(port || 8000, () => {
     // Make sure to stop the server when the app closes
     // Otherwise it keeps running on its own
-    electron.app.on('before-quit', () => server.close())
+    app.on('before-quit', () => server.close())
   })
 }
 
@@ -34,7 +34,7 @@ const adjustRenderer = directory => {
   const paths = ['_next', 'static']
   const isWindows = process.platform === 'win32'
 
-  electron.protocol.interceptFileProtocol('file', (request, callback) => {
+  protocol.interceptFileProtocol('file', (request, callback) => {
     let path = request.url.substr(isWindows ? 8 : 7)
 
     for (const replacement of paths) {
