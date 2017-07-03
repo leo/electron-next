@@ -11,17 +11,15 @@ const devServer = async (dir, port) => {
   // We need to load it here because the app's production
   // bundle shouldn't include it, which would result
   // in an error
-  const next = require('next')
-
-  const nextApp = next({ dev: true, dir })
-  const nextHandler = nextApp.getRequestHandler()
+  const next = require('next')({ dev: true, dir })
+  const requestHandler = next.getRequestHandler()
 
   // Build the renderer code and watch the files
-  await nextApp.prepare()
+  await next.prepare()
 
   // But if developing the application, create a
   // new native HTTP server (which supports hot code reloading)
-  const server = createServer(nextHandler)
+  const server = createServer(requestHandler)
 
   server.listen(port || 8000, () => {
     // Make sure to stop the server when the app closes
