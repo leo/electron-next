@@ -35,13 +35,13 @@
   "license": "MIT",
   "dependencies": {
     "app-root-path": ">=2.0.1",
-    "electron-is-dev": ">=0.1.2"
+    "electron-is-dev": ">=0.3.0"
   },
   "devDependencies": {
-    "eslint-config-prettier": "2.1.1",
-    "husky": "0.13.4",
-    "lint-staged": "3.6.1",
-    "prettier": "1.4.4",
+    "eslint-config-prettier": "2.3.0",
+    "husky": "0.14.3",
+    "lint-staged": "4.0.2",
+    "prettier": "1.5.3",
     "xo": "0.18.2"
   }
 }
