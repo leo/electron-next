@@ -1,6 +1,6 @@
 // Native
 const { createServer } = require('http')
-const { join } = require('path')
+const { join, parse } = require('path')
 
 // Packages
 const { app, protocol } = require('electron')
@@ -38,6 +38,11 @@ const adjustRenderer = directory => {
     for (const replacement of paths) {
       if (!path.includes(replacement)) {
         continue
+      }
+
+      // Strip volume name from path on Windows
+      if (isWindows) {
+        path = path.replace(parse(path).root, '')
       }
 
       path = join(directory, 'out', path)
