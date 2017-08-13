@@ -1,6 +1,6 @@
 // Native
 const { createServer } = require('http')
-const { parse, normalize, join } = require('path')
+const { join } = require('path')
 
 // Packages
 const { app, protocol } = require('electron')
@@ -40,11 +40,7 @@ const adjustRenderer = directory => {
         continue
       }
 
-      const parsed = parse(path)
-      const newPrefix = directory.replace(normalize(parsed.root), '')
-      const newPath = join(newPrefix, replacement)
-
-      path = normalize(path.replace(replacement, newPath))
+      path = join(directory, 'out', path)
     }
 
     callback({ path })
