@@ -48,6 +48,11 @@ const adjustRenderer = directory => {
       path = join(directory, 'out', path)
     }
 
+    // Electron doesn't like anything in the path to be encoded,
+    // so we need to undo that. This specifically allows for
+    // Electron apps with spaces in their app names.
+    path = decodeURIComponent(path)
+
     callback({ path })
   })
 }
