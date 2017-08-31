@@ -40,8 +40,8 @@
   "devDependencies": {
     "eslint-config-prettier": "2.3.0",
     "husky": "0.14.3",
-    "lint-staged": "4.0.3",
-    "prettier": "1.5.3",
+    "lint-staged": "4.0.4",
+    "prettier": "1.6.1",
     "xo": "0.18.2"
   }
 }
