@@ -13,7 +13,7 @@ This package lets you use [Next.js](https://github.com/zeit/next.js) for buildin
 Firstly, install the package using [npm](https://www.npmjs.com):
 
 ```bash
-npm install --save electron-next
+npm install electron-next
 ```
 
 Then load it:
