@@ -1,6 +1,6 @@
 // Native
 const { createServer } = require('http')
-const { join, parse } = require('path')
+const { join, parse, isAbsolute } = require('path')
 
 // Packages
 const { app, protocol } = require('electron')
@@ -74,7 +74,9 @@ module.exports = async (directories, port) => {
       continue
     }
 
-    directories[directory] = resolve(directories[directory])
+    if (!isAbsolute(directories[directory])) {
+      directories[directory] = resolve(directories[directory])
+    }
   }
 
   if (!isDev) {
