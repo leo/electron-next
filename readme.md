@@ -10,10 +10,10 @@ This package lets you use [Next.js](https://github.com/zeit/next.js) for buildin
 
 ## Usage
 
-Firstly, install the package using [npm](https://www.npmjs.com):
+Firstly, install the package using any node package manager:
 
 ```bash
-npm install electron-next
+yarn add electron-next
 ```
 
 Then load it:
