@@ -38,10 +38,10 @@
     "electron-is-dev": ">=0.3.0"
   },
   "devDependencies": {
-    "eslint-config-prettier": "2.3.0",
+    "eslint-config-prettier": "2.9.0",
     "husky": "0.14.3",
-    "lint-staged": "4.0.4",
-    "prettier": "1.6.1",
-    "xo": "0.18.2"
+    "lint-staged": "7.0.0",
+    "prettier": "1.10.2",
+    "xo": "0.20.3"
   }
 }
