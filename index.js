@@ -46,6 +46,7 @@ const adjustRenderer = directory => {
       }
 
       path = join(directory, 'out', path)
+      break
     }
 
     // Electron doesn't like anything in the path to be encoded,
