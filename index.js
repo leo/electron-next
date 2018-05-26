@@ -1,6 +1,6 @@
 // Native
 const { createServer } = require('http')
-const { join, parse, isAbsolute, normalize } = require('path')
+const { join, isAbsolute, normalize } = require('path')
 
 // Packages
 const { app, protocol } = require('electron')
