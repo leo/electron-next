@@ -1,6 +1,6 @@
 {
   "name": "electron-next",
-  "version": "3.1.4",
+  "version": "3.1.5",
   "description": "Build Electron apps using Next.js",
   "main": "index.js",
   "repository": "leo/electron-next",
