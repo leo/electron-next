@@ -1,6 +1,6 @@
 // Native
 const { createServer } = require('http')
-const { join, parse, isAbsolute } = require('path')
+const { join, isAbsolute, normalize } = require('path')
 
 // Packages
 const { app, protocol } = require('electron')
@@ -29,23 +29,32 @@ const devServer = async (dir, port) => {
 }
 
 const adjustRenderer = directory => {
-  const paths = ['_next', 'static']
+  const paths = ['/_next', '/static']
   const isWindows = process.platform === 'win32'
 
   protocol.interceptFileProtocol('file', (request, callback) => {
     let path = request.url.substr(isWindows ? 8 : 7)
 
-    for (const replacement of paths) {
-      if (!path.includes(replacement)) {
+    for (const prefix of paths) {
+      let newPath = path
+
+      // On windows the request looks like: file:///C:/static/bar
+      // On other systems it's file:///static/bar
+      if (isWindows) {
+        newPath = newPath.substr(2)
+      }
+
+      if (!newPath.startsWith(prefix)) {
         continue
       }
 
       // Strip volume name from path on Windows
       if (isWindows) {
-        path = path.replace(parse(path).root, '')
+        newPath = normalize(newPath)
       }
 
-      path = join(directory, 'out', path)
+      newPath = join(directory, 'out', newPath)
+      path = newPath
     }
 
     // Electron doesn't like anything in the path to be encoded,
