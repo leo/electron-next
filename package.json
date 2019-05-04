@@ -4,6 +4,7 @@
   "description": "Build Electron apps using Next.js",
   "main": "index.js",
   "repository": "leo/electron-next",
+  "types": "./index.d.ts",
   "scripts": {
     "precommit": "lint-staged",
     "test": "xo"
