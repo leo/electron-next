@@ -59,8 +59,6 @@ const adjustRenderer = directory => {
     // Electron apps with spaces in their app names.
     path = decodeURIComponent(path)
 
-    console.log("PATH", path)
-
     callback({ path })
   })
 }
