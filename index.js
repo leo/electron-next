@@ -32,23 +32,20 @@ const adjustRenderer = directory => {
   const paths = ['/_next', '/static']
   const isWindows = process.platform === 'win32'
 
+  const rscFile = /\/.+\.txt/
+
   protocol.interceptFileProtocol('file', (request, callback) => {
     let path = request.url.substr(isWindows ? 8 : 7)
 
-    for (const prefix of paths) {
-      let newPath = path
+    let newPath = path
 
-      // On windows the request looks like: file:///C:/static/bar
-      // On other systems it's file:///static/bar
-      if (isWindows) {
-        newPath = newPath.substr(2)
-      }
+    // On windows the request looks like: file:///C:/static/bar
+    // On other systems it's file:///static/bar
+    if (isWindows) {
+      newPath = newPath.substr(2)
+    }
 
-      if (!newPath.startsWith(prefix)) {
-        continue
-      }
-
-      // Strip volume name from path on Windows
+    if (paths.some(prefix => newPath.startsWith(prefix)) || rscFile.test(newPath)) {
       if (isWindows) {
         newPath = normalize(newPath)
       }
